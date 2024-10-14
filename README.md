@@ -1,9 +1,9 @@
 # Desafio de Galeria de Imagens - Processo Seletivo Frontend Fusion
 
-> OBS : Você receberá um e-mail com a data de início dos desafios, mas eles já estão disponíveis para acesso imediato. 
-Se ainda não preencheu o formulário, por favor, acesse o link para completá-lo.
-[Forms de inscrição](https://forms.gle/EJKDNKdmVZM3zQTr7)
-é importante está inscrito no formulário , pois o seu email precisa ser validado
+> OBS : Você receberá um e-mail com a data de início dos desafios, mas eles já estão disponíveis para acesso imediato.
+> Se ainda não preencheu o formulário, por favor, acesse o link para completá-lo.
+> [Forms de inscrição](https://forms.gle/EJKDNKdmVZM3zQTr7)
+> é importante está inscrito no formulário , pois o seu email precisa ser validado
 
 ## Sobre o Desafio
 
@@ -16,7 +16,8 @@ Crie uma aplicação de galeria de imagens utilizando React e a API [Picsum Phot
 - Visualização de imagens obtidas da API [Picsum Photos](https://picsum.photos/v2/list).
 - Funcionalidade para salvar imagens nos favoritos. 💾
 
-funcionalidade opcional: 
+funcionalidade opcional:
+
 - Opção de aplicar filtros para visualizar imagens por categoria, cor, etc. 🎨
 
 - Ao clicar em uma imagem, exibir informações detalhadas como autor, dimensões, e qualquer outra propriedade relevante disponível na API. 🖼️
