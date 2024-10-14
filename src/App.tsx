@@ -26,11 +26,11 @@ export function App() {
 
   return (
     <>
-      <header className="flex items-center gap-6">
-        <h1 className="font-serif text-title-color text-nowrap text-2xl">
+      <header className="grid grid-cols-[auto,24px] gris-rows-2 w-full items-center lg:flex lg:flex-nowrap gap-6">
+        <h1 className="font-serif text-title-color text-nowrap text-2xl row-span-1 col-span-2 text-center">
           Picsum Photos
         </h1>
-        <form className="flex items-center flex-grow gap-2 w-full bg-background-input/20 rounded-3xl py-2 px-4">
+        <form className="flex items-center flex-grow gap-2 lg:w-full bg-background-input/20 rounded-3xl py-2 px-4 col-span-1">
           <button>
             <Search color="#5F5F5F" size={16} />
           </button>
@@ -40,10 +40,10 @@ export function App() {
             className="placeholder:text-text-color font-light bg-transparent"
           />
         </form>
-        <button>
+        <button className="flex">
           <Heart
             color="##f87171"
-            className="fill-red-400 transition-all duration-200 hover:text-red-500 hover:fill-red-500"
+            className=" fill-red-400 transition-all duration-200 hover:text-red-500 hover:fill-red-500"
           />
         </button>
       </header>
@@ -52,7 +52,7 @@ export function App() {
           <h2 className="font-serif text-title-color text-5xl text-center mt-20">
             Gallery
           </h2>
-          <div className="flex justify-center gap-6 mt-32">
+          <div className="flex justify-center gap-6 mt-20">
             <button className="text-text-color font-bold font-sans pb-2 border-b-2 border-b-text-color">
               Todos
             </button>
