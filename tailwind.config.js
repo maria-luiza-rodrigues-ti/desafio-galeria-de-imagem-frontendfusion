@@ -6,6 +6,12 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        "text-color": "#2C2C2C",
+        "title-color": "#111111",
+        "background-input": "#767676",
+        "icon-colors": "#5F5F5F"
+      },
       fontFamily: {
         sans: ['Montserrat', 'sans'],
         serif: ['Oswald', 'serif'],
