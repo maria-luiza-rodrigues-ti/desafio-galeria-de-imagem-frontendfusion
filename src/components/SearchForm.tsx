@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { ImagesContext } from "../context/images-context";
+import { useNavigate } from "react-router-dom";
 
 const searchFormSchema = z.object({
   query: z.string(),
@@ -14,6 +15,7 @@ export type SearchFormInputs = z.infer<typeof searchFormSchema>;
 
 export function SearchForm() {
   const { searchImageByAuthor } = useContext(ImagesContext);
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm<SearchFormInputs>({
     resolver: zodResolver(searchFormSchema),
   });
@@ -24,6 +26,8 @@ export function SearchForm() {
     }
 
     searchImageByAuthor(data.query);
+
+    navigate(`/search?query=${data.query}`);
   }
 
   return (

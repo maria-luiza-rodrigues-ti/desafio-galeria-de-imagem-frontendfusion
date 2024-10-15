@@ -1,11 +1,12 @@
 import { Heart } from "lucide-react";
 import { SearchForm } from "./SearchForm";
+import { Link } from "react-router-dom";
 
 export function Header() {
   return (
     <header className="grid grid-cols-[auto,24px] gris-rows-2 w-full items-center lg:flex lg:flex-nowrap gap-6">
       <h1 className="font-serif text-title-color text-nowrap text-2xl row-span-1 col-span-2 text-center">
-        Picsum Photos
+        <Link to="/">Picsum Photos</Link>
       </h1>
       <SearchForm />
       <button className="flex">
