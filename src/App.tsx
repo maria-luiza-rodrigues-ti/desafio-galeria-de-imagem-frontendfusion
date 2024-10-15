@@ -1,14 +1,13 @@
-import { Gallery } from "./components/Gallery";
-import { Header } from "./components/Header";
+import { BrowserRouter } from "react-router-dom";
 import { ImagesProvider } from "./context/images-context";
+import { Router } from "./router";
 
 export function App() {
   return (
-    <ImagesProvider>
-      <Header />
-      <main>
-        <Gallery />
-      </main>
-    </ImagesProvider>
+    <BrowserRouter>
+      <ImagesProvider>
+        <Router />
+      </ImagesProvider>
+    </BrowserRouter>
   );
 }

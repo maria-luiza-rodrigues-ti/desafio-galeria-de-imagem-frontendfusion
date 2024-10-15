@@ -1,7 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Search } from "lucide-react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+
+import { ImagesContext } from "../context/images-context";
 
 const searchFormSchema = z.object({
   query: z.string(),
@@ -10,12 +13,17 @@ const searchFormSchema = z.object({
 export type SearchFormInputs = z.infer<typeof searchFormSchema>;
 
 export function SearchForm() {
+  const { searchImageByAuthor } = useContext(ImagesContext);
   const { register, handleSubmit } = useForm<SearchFormInputs>({
     resolver: zodResolver(searchFormSchema),
   });
 
   function handleSearchImage(data: SearchFormInputs) {
-    console.log(data.query);
+    if (!data.query) {
+      return;
+    }
+
+    searchImageByAuthor(data.query);
   }
 
   return (
@@ -28,7 +36,7 @@ export function SearchForm() {
       </button>
       <input
         type="text"
-        placeholder="Busque por imagens"
+        placeholder="Busque pelo autor da imagem"
         className="placeholder:text-text-color w-full font-light bg-transparent"
         {...register("query")}
       />

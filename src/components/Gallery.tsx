@@ -2,7 +2,7 @@ import { Heart } from "lucide-react";
 import { useContext } from "react";
 import { ImagesContext } from "../context/images-context";
 
-interface Image {
+export interface ImageProps {
   id: string;
   author: string;
   width: number;
@@ -29,7 +29,7 @@ export function Gallery() {
       </div>
       <ul className="columns-2 sm:columns-3 lg:columns-5 pt-10 pb-20 md:py-30 gap-4">
         {images &&
-          images.map((image: Image) => (
+          images.map((image: ImageProps) => (
             <li key={image.id} className="mb-4 break-inside-avoid relative">
               <button className="bg-white/70 p-2 rounded-full absolute top-2 right-2 group">
                 <Heart
