@@ -3,7 +3,7 @@ import { Gallery } from "../components/Gallery";
 import { ImagesContext } from "../context/images-context";
 
 export function Home() {
-  const { images } = useContext(ImagesContext);
+  const { images, isFetching } = useContext(ImagesContext);
 
   return (
     <section>
@@ -18,7 +18,7 @@ export function Home() {
           Salvo
         </button>
       </div>
-      <Gallery images={images} />
+      {isFetching ? <p>Carregando...</p> : <Gallery images={images} />}
     </section>
   );
 }

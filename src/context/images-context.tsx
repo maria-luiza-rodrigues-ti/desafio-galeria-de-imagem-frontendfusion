@@ -44,6 +44,19 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
     fetchImages();
   }, []);
 
+  function getStoredImages() {
+    const storedImages = localStorage.getItem(
+      "@picsum-photos:images-filtered-1.0.0"
+    );
+    if (storedImages) {
+      setImagesFilteredByAuthor(JSON.parse(storedImages));
+    }
+  }
+
+  useEffect(() => {
+    getStoredImages();
+  }, []);
+
   function searchImageByAuthor(query: string) {
     const imagesFiltered = images.filter((image) =>
       image.author.toLowerCase().includes(query.toLowerCase())
@@ -51,6 +64,13 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
 
     setImagesFilteredByAuthor(imagesFiltered);
   }
+
+  useEffect(() => {
+    if (images.length > 0) {
+      const stateJSON = JSON.stringify(imagesFilteredByAuthor);
+      localStorage.setItem("@picsum-photos:images-filtered-1.0.0", stateJSON);
+    }
+  }, [images, imagesFilteredByAuthor]);
 
   return (
     <ImagesContext.Provider
