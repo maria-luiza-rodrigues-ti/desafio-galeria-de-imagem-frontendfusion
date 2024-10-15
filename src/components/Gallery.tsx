@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
-import { api } from "../lib/axios";
+import { useContext } from "react";
+import { ImagesContext } from "../context/images-context";
 
 interface Image {
   id: string;
@@ -12,17 +12,7 @@ interface Image {
 }
 
 export function Gallery() {
-  const [imageList, setImageList] = useState([]);
-
-  const fetchImages = async () => {
-    const response = await api.get("/");
-
-    setImageList(response.data);
-  };
-
-  useEffect(() => {
-    fetchImages();
-  }, []);
+  const { images } = useContext(ImagesContext);
 
   return (
     <section>
@@ -38,8 +28,8 @@ export function Gallery() {
         </button>
       </div>
       <ul className="columns-2 sm:columns-3 lg:columns-5 pt-10 pb-20 md:py-30 gap-4">
-        {imageList &&
-          imageList.map((image: Image) => (
+        {images &&
+          images.map((image: Image) => (
             <li key={image.id} className="mb-4 break-inside-avoid relative">
               <button className="bg-white/70 p-2 rounded-full absolute top-2 right-2 group">
                 <Heart
