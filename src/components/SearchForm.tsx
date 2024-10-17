@@ -40,7 +40,7 @@ export function SearchForm() {
       </button>
       <input
         type="text"
-        placeholder="Busque pelo autor da imagem"
+        placeholder="Busque imagem pelo autor"
         className="placeholder:text-text-color w-full font-light bg-transparent"
         {...register("query")}
       />

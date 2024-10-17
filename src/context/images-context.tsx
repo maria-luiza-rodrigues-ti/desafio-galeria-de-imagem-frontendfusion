@@ -8,13 +8,16 @@ interface ImageProps {
   height: number;
   url: string;
   download_url: string;
+  saved?: boolean;
 }
 
 interface ImagesContextType {
   images: ImageProps[];
   imagesFilteredByAuthor: ImageProps[];
+  imagesSaved: ImageProps[];
   isFetching: boolean;
   searchImageByAuthor: (query: string) => void;
+  saveImages: (imagesToSave: ImageProps[]) => void;
 }
 
 interface ImagesProviderProps {
@@ -29,11 +32,16 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
   const [imagesFilteredByAuthor, setImagesFilteredByAuthor] = useState<
     ImageProps[]
   >([]);
+  const [imagesSaved, setImagesSaved] = useState<ImageProps[]>([]);
 
   const fetchImages = async () => {
     const response = await axios
       .get("https://picsum.photos/v2/list")
-      .then((response) => setImages(response.data))
+      .then((response) =>
+        setImages(
+          response.data.map((image: ImageProps) => ({ ...image, saved: false }))
+        )
+      )
       .catch((err) => console.error(err))
       .finally(() => setIsFetching(false));
 
@@ -44,17 +52,28 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
     fetchImages();
   }, []);
 
-  function getStoredImages() {
-    const storedImages = localStorage.getItem(
-      "@picsum-photos:images-filtered-1.0.0"
+  function getSearchedImages() {
+    const searchedImages = localStorage.getItem(
+      "@picsum-photos:searched-images-1.0.0"
     );
-    if (storedImages) {
-      setImagesFilteredByAuthor(JSON.parse(storedImages));
+    if (searchedImages) {
+      setImagesFilteredByAuthor(JSON.parse(searchedImages));
+    }
+  }
+
+  function getSavedImages() {
+    const savedImages = localStorage.getItem(
+      "@picsum-photos:images-saved-1.0.0"
+    );
+
+    if (savedImages) {
+      setImagesFilteredByAuthor(JSON.parse(savedImages));
     }
   }
 
   useEffect(() => {
-    getStoredImages();
+    getSearchedImages();
+    getSavedImages();
   }, []);
 
   function searchImageByAuthor(query: string) {
@@ -68,17 +87,27 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
   useEffect(() => {
     if (images.length > 0) {
       const stateJSON = JSON.stringify(imagesFilteredByAuthor);
-      localStorage.setItem("@picsum-photos:images-filtered-1.0.0", stateJSON);
+      localStorage.setItem("@picsum-photos:searched-images-1.0.0", stateJSON);
     }
   }, [images, imagesFilteredByAuthor]);
+
+  function saveImages(imagesToSave: ImageProps[]) {
+    setImagesSaved(imagesToSave);
+  }
+
+  useEffect(() => {
+    console.log(imagesSaved);
+  }, [imagesSaved]);
 
   return (
     <ImagesContext.Provider
       value={{
         images,
         isFetching,
+        imagesSaved,
         imagesFilteredByAuthor,
         searchImageByAuthor,
+        saveImages,
       }}
     >
       {children}
