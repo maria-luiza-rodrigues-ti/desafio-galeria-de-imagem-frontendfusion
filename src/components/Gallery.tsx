@@ -1,6 +1,7 @@
 import { Heart } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { ImagesContext } from "../context/images-context";
+import { Toaster, toast } from "sonner";
 
 export interface ImageProps {
   id: string;
@@ -17,13 +18,19 @@ export function Gallery({ images }: { images: ImageProps[] }) {
   const [localImages, setLocalImages] = useState<ImageProps[]>(images);
 
   function handleSaveImage(image: ImageProps) {
-    setLocalImages((prevImages) =>
-      prevImages.map((prevImage) =>
+    if (!image.saved) {
+      toast.success("Imagem salva nos favoritos!");
+    } else {
+      toast.error("Imagem removida dos favoritos!");
+    }
+
+    setLocalImages((prevImages) => {
+      return prevImages.map((prevImage) =>
         prevImage.id === image.id
           ? { ...prevImage, saved: !prevImage.saved }
           : prevImage
-      )
-    );
+      );
+    });
   }
 
   useEffect(() => {
@@ -59,6 +66,7 @@ export function Gallery({ images }: { images: ImageProps[] }) {
             />
           </li>
         ))}
+      \ <Toaster richColors />
     </ul>
   );
 }
