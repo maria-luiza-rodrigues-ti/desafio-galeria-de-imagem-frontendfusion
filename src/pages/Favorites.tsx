@@ -8,8 +8,6 @@ export function Favorites() {
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState("salvos");
 
-  console.log(savedImages);
-
   function handleSavedImages() {
     setActiveButton("salvos");
     navigate(`/favoritos`);

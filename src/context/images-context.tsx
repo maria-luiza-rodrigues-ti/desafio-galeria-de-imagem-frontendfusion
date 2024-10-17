@@ -63,11 +63,11 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
 
   function getSavedImages() {
     const savedImages = localStorage.getItem(
-      "@picsum-photos:images-saved-1.0.0"
+      "@picsum-photos:saved-images-1.0.0"
     );
 
     if (savedImages) {
-      setImagesFilteredByAuthor(JSON.parse(savedImages));
+      setSavedImages(JSON.parse(savedImages));
     }
   }
 
@@ -86,16 +86,29 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
 
   useEffect(() => {
     if (images.length > 0) {
-      const stateJSON = JSON.stringify(imagesFilteredByAuthor);
-      localStorage.setItem("@picsum-photos:searched-images-1.0.0", stateJSON);
+      const imagesFiltredByAuthorJSON = JSON.stringify(imagesFilteredByAuthor);
+      localStorage.setItem(
+        "@picsum-photos:searched-images-1.0.0",
+        imagesFiltredByAuthorJSON
+      );
     }
   }, [images, imagesFilteredByAuthor]);
 
   function saveImages(imagesToSave: ImageProps[]) {
     setSavedImages(imagesToSave);
 
+    const updatedImages = images.map((image) => {
+      if (imagesToSave.some((savedImage) => savedImage.id === image.id)) {
+        return { ...image, saved: true };
+      }
+
+      return image;
+    });
+
+    setImages(updatedImages);
+
     const stateJSON = JSON.stringify(imagesToSave);
-    localStorage.setItem("@picsum-photos:images-saved-1.0.0", stateJSON);
+    localStorage.setItem("@picsum-photos:saved-images-1.0.0", stateJSON);
   }
 
   return (
