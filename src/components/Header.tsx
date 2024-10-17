@@ -1,6 +1,6 @@
 import { Heart } from "lucide-react";
 import { SearchForm } from "./SearchForm";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export function Header() {
   return (
@@ -9,12 +9,12 @@ export function Header() {
         <Link to="/">Picsum Photos</Link>
       </h1>
       <SearchForm />
-      <button className="flex">
+      <NavLink to={"/favoritos"} className="flex group">
         <Heart
           color="##f87171"
-          className=" fill-red-400 transition-all duration-200 hover:text-red-500 hover:fill-red-500"
+          className=" fill-red-400 transition-all duration-200 hover:text-red-500 hover:fill-red-500 group-active:text-red-500 group-active:fill-red-500"
         />
-      </button>
+      </NavLink>
     </header>
   );
 }
