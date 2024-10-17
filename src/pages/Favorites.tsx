@@ -3,25 +3,26 @@ import { Gallery } from "../components/Gallery";
 import { ImagesContext } from "../context/images-context";
 import { useNavigate } from "react-router-dom";
 
-export function Home() {
-  const { images, isFetching } = useContext(ImagesContext);
+export function Favorites() {
+  const { isFetching, savedImages } = useContext(ImagesContext);
   const navigate = useNavigate();
-  const [activeButton, setActiveButton] = useState("todos");
+  const [activeButton, setActiveButton] = useState("salvos");
 
-  function handleAllImages() {
-    setActiveButton("todos");
-    navigate(`/`);
-  }
+  console.log(savedImages);
 
   function handleSavedImages() {
     setActiveButton("salvos");
     navigate(`/favoritos`);
   }
+  function handleAllImages() {
+    setActiveButton("todos");
+    navigate(`/`);
+  }
 
   return (
     <section>
       <h2 className="font-serif text-title-color text-5xl text-center mt-20">
-        Gallery
+        Favorites
       </h2>
       <div className="flex justify-center gap-6 mt-20">
         <button
@@ -54,7 +55,7 @@ export function Home() {
       {isFetching ? (
         <p className="text-center pt-10">Carregando...</p>
       ) : (
-        <Gallery images={images} />
+        <Gallery images={savedImages} />
       )}
     </section>
   );

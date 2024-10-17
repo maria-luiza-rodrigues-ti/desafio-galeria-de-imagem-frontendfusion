@@ -14,7 +14,7 @@ interface ImageProps {
 interface ImagesContextType {
   images: ImageProps[];
   imagesFilteredByAuthor: ImageProps[];
-  imagesSaved: ImageProps[];
+  savedImages: ImageProps[];
   isFetching: boolean;
   searchImageByAuthor: (query: string) => void;
   saveImages: (imagesToSave: ImageProps[]) => void;
@@ -32,7 +32,7 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
   const [imagesFilteredByAuthor, setImagesFilteredByAuthor] = useState<
     ImageProps[]
   >([]);
-  const [imagesSaved, setImagesSaved] = useState<ImageProps[]>([]);
+  const [savedImages, setSavedImages] = useState<ImageProps[]>([]);
 
   const fetchImages = async () => {
     const response = await axios
@@ -92,19 +92,18 @@ export function ImagesProvider({ children }: ImagesProviderProps) {
   }, [images, imagesFilteredByAuthor]);
 
   function saveImages(imagesToSave: ImageProps[]) {
-    setImagesSaved(imagesToSave);
-  }
+    setSavedImages(imagesToSave);
 
-  useEffect(() => {
-    console.log(imagesSaved);
-  }, [imagesSaved]);
+    const stateJSON = JSON.stringify(imagesToSave);
+    localStorage.setItem("@picsum-photos:images-saved-1.0.0", stateJSON);
+  }
 
   return (
     <ImagesContext.Provider
       value={{
         images,
         isFetching,
-        imagesSaved,
+        savedImages,
         imagesFilteredByAuthor,
         searchImageByAuthor,
         saveImages,

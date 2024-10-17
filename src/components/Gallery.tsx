@@ -17,6 +17,8 @@ export function Gallery({ images }: { images: ImageProps[] }) {
   const { saveImages } = useContext(ImagesContext);
   const [localImages, setLocalImages] = useState<ImageProps[]>(images);
 
+  console.log(images);
+
   function handleSaveImage(image: ImageProps) {
     if (!image.saved) {
       toast.success("Imagem salva nos favoritos!");
@@ -66,7 +68,7 @@ export function Gallery({ images }: { images: ImageProps[] }) {
             />
           </li>
         ))}
-      \ <Toaster richColors />
+      <Toaster richColors />
     </ul>
   );
 }
