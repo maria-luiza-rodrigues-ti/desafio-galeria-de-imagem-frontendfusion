@@ -7,7 +7,7 @@ import "@radix-ui/themes/styles.css";
 
 export function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter>
       <ImagesProvider>
         <Theme>
           <Router />
