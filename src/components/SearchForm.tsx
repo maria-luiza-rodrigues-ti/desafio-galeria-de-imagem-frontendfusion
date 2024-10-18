@@ -35,7 +35,7 @@ export function SearchForm() {
       onSubmit={handleSubmit(handleSearchImage)}
       className="flex items-center flex-grow gap-2 lg:w-full bg-background-input/20 rounded-3xl py-2 px-4 col-span-1"
     >
-      <button type="submit">
+      <button type="submit" aria-label="Pesquisa">
         <Search color="#5F5F5F" size={16} />
       </button>
       <input

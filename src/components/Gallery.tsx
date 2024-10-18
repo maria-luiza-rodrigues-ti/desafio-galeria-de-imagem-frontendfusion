@@ -66,6 +66,7 @@ export function Gallery({ images }: { images: ImageProps[] }) {
               <button
                 className="bg-white/70 p-2 rounded-full absolute top-2 right-2 group"
                 onClick={() => handleSaveImage(image)}
+                aria-label="Salvar imagem"
               >
                 <Heart
                   color="#111"
@@ -88,7 +89,6 @@ export function Gallery({ images }: { images: ImageProps[] }) {
                     <figure className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background bg-white rounded-2xl h-[70vh] w-[70vh] flex gap-2 overflow-hidden">
                       <img
                         src={image.download_url}
-                        alt=""
                         className="w-1/2 object-cover"
                       />
                       <Dialog.Close />
